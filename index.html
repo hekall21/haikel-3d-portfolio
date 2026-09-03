@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Muhammad Haikel Saleh (Kaell) | Creative Technologist & 3D Web Specialist</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #07080B;
+      color: #F1F5F9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .glass-card {
+      background: rgba(15, 17, 26, 0.78);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
+    }
+    #hero-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .content-layer {
+      position: relative;
+      z-index: 10;
+    }
+    /* Mobile Touch optimization */
+    a, button { touch-action: manipulation; }
+  </style>
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+  <!-- Interactive Three.js Background Galaxy Canvas -->
+  <canvas id="hero-canvas"></canvas>
+
+  <div class="content-layer min-h-screen flex flex-col justify-between">
+    
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-3 py-3 md:px-6 md:py-4">
+      <div class="max-w-6xl mx-auto glass-card rounded-2xl px-4 py-2.5 md:px-6 md:py-3 flex items-center justify-between">
+        <a href="#hero" class="flex items-center gap-2.5 group">
+          <div class="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center font-black text-white text-xs shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+            K
+          </div>
+          <div>
+            <span class="font-extrabold text-xs md:text-sm tracking-tight block leading-tight">HAIKEL (KAELL)</span>
+            <span class="mono text-[9px] md:text-[10px] text-cyan-400 block leading-tight">CREATIVE TECH</span>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-slate-300">
+          <a href="#about" class="hover:text-white transition">Tentang Saya</a>
+          <a href="#skills" class="hover:text-white transition">Keahlian</a>
+          <a href="#projects" class="hover:text-white transition">Karya Unggulan</a>
+          <a href="#contact" class="hover:text-white transition">Kontak</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <a href="https://wa.me/62895320959499?text=Halo%20Haikel,%20saya%20melihat%20portfolio%20kamu%20dan%20tertarik%20bekerja%20sama" target="_blank" class="bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-black font-extrabold px-3 py-1.5 md:px-4 md:py-2 rounded-xl text-[11px] md:text-xs flex items-center gap-1.5 transition shadow-lg shadow-emerald-500/20 active:scale-95">
+            <span>💬</span><span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-6 max-w-6xl mx-auto w-full space-y-20 md:space-y-32">
+
+      <!-- SECTION 1: HERO -->
+      <section id="hero" class="min-h-[70vh] md:min-h-[75vh] flex flex-col justify-center items-start">
+        <div class="inline-flex items-center gap-2 glass-card px-3.5 py-1.5 rounded-full mb-4 md:mb-6 border-indigo-500/30">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="text-[11px] md:text-xs mono text-indigo-300 font-semibold">Tersedia untuk Proyek & Kolaborasi</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-tight md:leading-none mb-4 md:mb-6 break-words">
+          Muhammad Haikel Saleh<br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-500">
+            Dikenal Sebagai Kaell.
+          </span>
+        </h1>
+
+        <p class="text-sm sm:text-base md:text-xl text-slate-300 max-w-2xl font-light leading-relaxed mb-8 md:mb-10">
+          Saya adalah seorang <strong class="text-white font-semibold">Creative Technologist & 3D Web Specialist</strong> asal Jakarta, Indonesia. Berfokus pada perpaduan antarmuka web modern, visual interaktif 3D WebGL, dan arsitektur kode bersih.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 md:gap-4 w-full sm:w-auto">
+          <a href="#projects" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-3.5 rounded-2xl text-xs sm:text-sm text-center transition shadow-xl shadow-indigo-600/30 flex items-center justify-center gap-2 active:scale-95">
+            <span>Jelajahi Proyek Saya</span><span>↓</span>
+          </a>
+          <a href="https://spiderman-portofolio.vercel.app" target="_blank" class="flex-1 sm:flex-none glass-card hover:bg-white/10 px-5 py-3.5 rounded-2xl text-xs sm:text-sm font-semibold text-center transition flex items-center justify-center gap-2 active:scale-95">
+            <span>🕷️ Spider-Man Web</span><span>↗</span>
+          </a>
+          <a href="https://github.com/hekall21" target="_blank" class="flex-1 sm:flex-none glass-card hover:bg-white/10 px-5 py-3.5 rounded-2xl text-xs sm:text-sm font-semibold text-center transition flex items-center justify-center gap-2 active:scale-95">
+            <span>GitHub @hekall21</span><span>↗</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- SECTION 2: TENTANG SAYA -->
+      <section id="about" class="space-y-6 md:space-y-8">
+        <div>
+          <span class="mono text-xs text-indigo-400 font-bold uppercase tracking-widest block mb-1.5">// 01. Profil & Perjalanan</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">Tentang Saya & Filosofi Rekayasa</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+          <div class="glass-card p-6 md:p-8 rounded-3xl md:col-span-2 space-y-4">
+            <h3 class="text-lg sm:text-xl font-bold text-white">Mengubah Ide Menjadi Pengalaman Interaktif 3D</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Halo! Saya Haikel (Kaell). Saya percaya bahwa sebuah website di era modern adalah kanvas digital interaktif di mana pengguna bisa merasakan kedalaman spasial, fisika gerak (*kinetic physics*), dan responsivitas taktil yang hidup.
+            </p>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Dengan memadukan standar desain visual kelas dunia (Awwwards, Mobbin, Land-book) dan arsitektur rekayasa perangkat lunak (*Clean Architecture, SOLID, and WebGL*), saya menghadirkan website yang memukau dan berkinerja tinggi.
+            </p>
+            <div class="pt-4 border-t border-white/10 grid grid-cols-3 gap-2 sm:gap-4 text-center">
+              <div class="p-2">
+                <span class="text-xl sm:text-2xl font-black text-cyan-400 block">35+</span>
+                <span class="text-[10px] sm:text-[11px] text-slate-400 block">Repositori</span>
+              </div>
+              <div class="p-2">
+                <span class="text-xl sm:text-2xl font-black text-indigo-400 block">3D WebGL</span>
+                <span class="text-[10px] sm:text-[11px] text-slate-400 block">Fokus Utama</span>
+              </div>
+              <div class="p-2">
+                <span class="text-xl sm:text-2xl font-black text-emerald-400 block">Jakarta</span>
+                <span class="text-[10px] sm:text-[11px] text-slate-400 block">Domisili</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Identity Card -->
+          <div class="glass-card p-6 md:p-8 rounded-3xl flex flex-col justify-between space-y-6">
+            <div>
+              <span class="mono text-[10px] text-slate-400 uppercase tracking-wider block mb-3">DATA PRIBADI RESMI</span>
+              <div class="space-y-2.5 text-xs">
+                <div>
+                  <span class="text-slate-400 block text-[11px]">Nama Lengkap:</span>
+                  <span class="font-bold text-white text-sm">Muhammad Haikel Saleh</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[11px]">Panggilan:</span>
+                  <span class="font-bold text-white text-sm">Kaell</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[11px]">Lokasi:</span>
+                  <span class="font-bold text-white text-sm">Jakarta Timur, Indonesia 🇮🇩</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[11px]">Email:</span>
+                  <span class="font-bold text-cyan-400 mono text-xs break-all">haikelsaleh21@gmail.com</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="https://wa.me/62895320959499" target="_blank" class="w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold py-3 rounded-2xl text-xs text-center transition block active:scale-95">
+              Hubungi via WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: KEAHLIAN -->
+      <section id="skills" class="space-y-6 md:space-y-8">
+        <div>
+          <span class="mono text-xs text-indigo-400 font-bold uppercase tracking-widest block mb-1.5">// 02. Keahlian & Teknologi</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">Teknologi yang Saya Kuasai</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+          <div class="glass-card p-6 md:p-7 rounded-3xl space-y-3">
+            <div class="text-2xl md:text-3xl">🌌</div>
+            <h3 class="text-base sm:text-lg font-bold text-white">3D WebGL & WebXR</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Membangun ruang virtual imersif, manipulasi partikel, shader GLSL, pencahayaan PBR raytraced, dan kontrol kamera 3D dengan Three.js.
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded">Three.js</span>
+              <span class="mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded">WebGL</span>
+              <span class="mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded">GSAP 3D</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 md:p-7 rounded-3xl space-y-3">
+            <div class="text-2xl md:text-3xl">⚡</div>
+            <h3 class="text-base sm:text-lg font-bold text-white">Frontend Modern & UI/UX</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Penerapan standar desain kelas dunia (Linear, Apple, Vercel). Responsif mobile sempurna, aksesibilitas WCAG, dan micro-interactions halus.
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded">React 19</span>
+              <span class="mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded">TypeScript</span>
+              <span class="mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded">Tailwind v4</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 md:p-7 rounded-3xl space-y-3">
+            <div class="text-2xl md:text-3xl">🏛️</div>
+            <h3 class="text-base sm:text-lg font-bold text-white">Clean Architecture & Backend</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Arsitektur Onion Layers berlapis dengan validasi Zod DTO, database PostgreSQL/Supabase, REST API standar envelope, dan Vercel serverless.
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded">Node.js</span>
+              <span class="mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded">Clean Arch</span>
+              <span class="mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded">Supabase</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: KARYA UNGGULAN -->
+      <section id="projects" class="space-y-6 md:space-y-8">
+        <div class="flex items-end justify-between">
+          <div>
+            <span class="mono text-xs text-indigo-400 font-bold uppercase tracking-widest block mb-1.5">// 03. Galeri Karya Unggulan</span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">Proyek & Alat Nyata</h2>
+          </div>
+          <a href="https://github.com/hekall21" target="_blank" class="text-xs mono text-cyan-400 hover:underline hidden sm:block">
+            Lihat semua 35 repositori →
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          
+          <!-- Card 1: 3D Mockup Studio -->
+          <div class="glass-card rounded-3xl p-6 md:p-8 flex flex-col justify-between space-y-6">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] md:text-xs mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-bold">ALAT NYATA UNTUK DEVELOPER</span>
+                <span class="text-xl">📸</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-2">3D Device Mockup Studio</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Generator mockup laptop 3D interaktif. Upload screenshot karyamu dari HP/Laptop, putar dalam 3D, dan download PNG jernih siap pakai.
+              </p>
+            </div>
+            <a href="https://hekall21.github.io/mockup-3d-studio/" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold py-3.5 rounded-2xl text-xs text-center transition block shadow-lg shadow-emerald-500/20 active:scale-95">
+              Buka 3D Mockup Studio ↗
+            </a>
+          </div>
+
+          <!-- Card 2: CyberVision WebCam -->
+          <div class="glass-card rounded-3xl p-6 md:p-8 flex flex-col justify-between space-y-6">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] md:text-xs mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full font-bold">COMPUTER VISION & HUD</span>
+                <span class="text-xl">📹</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-2">CyberVision WebCam HUD</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Kamera real-time bertema Cyberpunk & Iron Man dengan filter Matrix ASCII, thermal vision, target reticle berputar, dan tombol ambil foto.
+              </p>
+            </div>
+            <a href="https://hekall21.github.io/cyber-vision-cam-3d/" target="_blank" class="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold py-3.5 rounded-2xl text-xs text-center transition block shadow-lg shadow-cyan-500/20 active:scale-95">
+              Buka CyberVision Cam ↗
+            </a>
+          </div>
+
+          <!-- Card 3: Spider-Man Portfolio -->
+          <div class="glass-card rounded-3xl p-6 md:p-8 flex flex-col justify-between space-y-6">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] md:text-xs mono bg-rose-500/10 text-rose-400 border border-rose-500/20 px-3 py-1 rounded-full font-bold">CINEMATIC WEBXR</span>
+                <span class="text-xl">🕷️</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-2">Spider-Man Portfolio</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Portofolio sinematik bertema Spider-Man dengan efek audio web synthesizer, animasi interaktif responsif kursor, dan gaya Neo-Brutalisme.
+              </p>
+            </div>
+            <a href="https://spiderman-portofolio.vercel.app" target="_blank" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-extrabold py-3.5 rounded-2xl text-xs text-center transition block shadow-lg shadow-rose-600/20 active:scale-95">
+              Buka Spider-Man Web ↗
+            </a>
+          </div>
+
+          <!-- Card 4: Spatial Noir 3D Gallery -->
+          <div class="glass-card rounded-3xl p-6 md:p-8 flex flex-col justify-between space-y-6">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] md:text-xs mono bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full font-bold">THREE.JS VIRTUAL REALITY</span>
+                <span class="text-xl">🪐</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-2">Spatial Noir 3D Universe</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Galeri luar angkasa 3D WebGL dengan 4.000 partikel kosmik, inti Torus logam raksasa, dan pod pameran 3D interaktif yang bisa diklik untuk terbang.
+              </p>
+            </div>
+            <a href="https://hekall21.github.io/spatial-noir-gallery/" target="_blank" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-3.5 rounded-2xl text-xs text-center transition block shadow-lg shadow-indigo-600/20 active:scale-95">
+              Buka Spatial 3D Galaxy ↗
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 5: KONTAK -->
+      <section id="contact" class="glass-card rounded-3xl p-8 md:p-16 text-center relative overflow-hidden border-indigo-500/30">
+        <div class="max-w-2xl mx-auto space-y-5 md:space-y-6">
+          <span class="mono text-xs text-emerald-400 font-bold uppercase tracking-widest block">MARI BANGUN SESUATU YANG HEBAT</span>
+          <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">Punya Ide Proyek? Mari Bicara!</h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Saya selalu terbuka untuk tawaran proyek freelance, kolaborasi kreatif, maupun posisi full-time di bidang Frontend & Creative Tech.
+          </p>
+          <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
+            <a href="https://wa.me/62895320959499?text=Halo%20Haikel,%20saya%20tertarik%20bekerja%20sama%20dengan%20kamu!" target="_blank" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold px-8 py-3.5 rounded-2xl text-xs sm:text-sm transition shadow-xl shadow-emerald-500/20 flex items-center justify-center gap-2 active:scale-95">
+              <span>💬</span><span>Chat di WhatsApp</span>
+            </a>
+            <a href="mailto:haikelsaleh21@gmail.com" class="w-full sm:w-auto glass-card hover:bg-white/10 px-8 py-3.5 rounded-2xl text-xs sm:text-sm font-bold text-white transition flex items-center justify-center gap-2 active:scale-95">
+              <span>✉️</span><span>Kirim Email</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-6 md:py-8 px-6 text-center text-[11px] md:text-xs text-slate-400 mono">
+      <p>© 2026 Muhammad Haikel Saleh (Kaell). Dibuat dengan cinta & Three.js WebGL.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    const canvas = document.getElementById('hero-canvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 15);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Particles
+    const pCount = 1500;
+    const pGeo = new THREE.BufferGeometry();
+    const pPos = new Float32Array(pCount * 3);
+    for (let i = 0; i < pCount * 3; i += 3) {
+      pPos[i] = (Math.random() - 0.5) * 50;
+      pPos[i+1] = (Math.random() - 0.5) * 50;
+      pPos[i+2] = (Math.random() - 0.5) * 30;
+    }
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    const pMat = new THREE.PointsMaterial({ size: 0.08, color: 0x6366F1, transparent: true, opacity: 0.6 });
+    const pMesh = new THREE.Points(pGeo, pMat);
+    scene.add(pMesh);
+
+    // 3D Core
+    const coreGeo = new THREE.IcosahedronGeometry(3.5, 1);
+    const coreMat = new THREE.MeshBasicMaterial({ color: 0x06B6D4, wireframe: true, transparent: true, opacity: 0.12 });
+    const core = new THREE.Mesh(coreGeo, coreMat);
+    core.position.set(window.innerWidth < 640 ? 0 : 5, -1, -5);
+    scene.add(core);
+
+    let clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+      pMesh.rotation.y = t * 0.02;
+      core.rotation.y = t * 0.08;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      if (core) {
+        core.position.x = window.innerWidth < 640 ? 0 : 5;
+      }
+    }
+    window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', () => setTimeout(onResize, 200));
+  </script>
+</body>
+</html>
