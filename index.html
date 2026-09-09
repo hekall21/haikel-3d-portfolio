@@ -259,6 +259,50 @@
           </a>
         </div>
 
+        <!-- 3D Coverflow Carousel Interactive Showcase -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 overflow-hidden relative border-indigo-500/20">
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span class="mono text-xs font-bold text-cyan-300 tracking-wider uppercase">3D COVERFLOW INTERACTIVE REEL</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="cf-prev-btn" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white transition active:scale-95" aria-label="Previous Project">
+                ←
+              </button>
+              <button id="cf-next-btn" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white transition active:scale-95" aria-label="Next Project">
+                →
+              </button>
+            </div>
+          </div>
+
+          <!-- 3D Viewport with Inertia Drag -->
+          <div id="cf-viewport" class="relative w-full overflow-hidden cursor-grab active:cursor-grabbing outline-none py-8 md:py-12" style="perspective: 1000px; touch-action: pan-y;" tabindex="0">
+            <div id="cf-stage" class="relative select-none" style="height: clamp(220px, 30vw, 320px); transform-style: preserve-3d;">
+              <!-- Cards rendered dynamically by Coverflow Engine -->
+            </div>
+          </div>
+
+          <!-- Active Project HUD -->
+          <div id="cf-hud" class="mt-4 flex flex-col items-center text-center max-w-lg mx-auto space-y-3 transition-all duration-300">
+            <span id="cf-badge" class="text-[10px] md:text-xs mono px-3 py-1 rounded-full font-bold border">KATEGORI</span>
+            <h3 id="cf-title" class="text-xl sm:text-2xl font-bold text-white tracking-tight">Judul Proyek</h3>
+            <p id="cf-desc" class="text-xs text-slate-300 leading-relaxed">Deskripsi Proyek</p>
+            <a id="cf-link" href="#" target="_blank" class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-400 hover:from-indigo-400 hover:to-cyan-300 text-black font-extrabold px-6 py-2.5 rounded-xl text-xs transition shadow-lg shadow-indigo-500/20 active:scale-95">
+              <span>Buka Proyek Ini ↗</span>
+            </a>
+          </div>
+
+          <!-- Pagination Dots -->
+          <div id="cf-pagination" class="flex items-center justify-center gap-1.5 mt-6">
+            <!-- Dots rendered dynamically -->
+          </div>
+        </div>
+
+        <div class="pt-4 flex items-center justify-between">
+          <h3 class="mono text-xs text-slate-400 uppercase tracking-wider font-semibold">// Telusuri Lebih Banyak Proyek (Grid Mode)</h3>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           
           <!-- Card 1: 3D Mockup Studio -->
@@ -456,6 +500,277 @@
     }
     window.addEventListener('resize', onResize);
     window.addEventListener('orientationchange', () => setTimeout(onResize, 200));
+
+    // ==========================================
+    // 3D COVERFLOW REEL ENGINE (Clean Architecture)
+    // ==========================================
+    (function initCoverflow() {
+      const slides = [
+        {
+          title: "3D Device Mockup Studio",
+          category: "ALAT NYATA DEVELOPER",
+          badgeClass: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+          desc: "Generator mockup laptop 3D interaktif. Upload screenshot karyamu, putar dalam 3D, dan download PNG jernih siap pakai.",
+          link: "https://hekall21.github.io/mockup-3d-studio/",
+          img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=640&h=640&fit=crop&q=70"
+        },
+        {
+          title: "Haikel Spatial Gallery",
+          category: "SPATIAL 3D ARCHIVE",
+          badgeClass: "text-sky-400 border-sky-500/30 bg-sky-500/10",
+          desc: "Galeri media spasial interaktif dengan 3D Coverflow Carousel dan audio ambien sinematik.",
+          link: "https://github.com/hekall21/haikel-spatial-gallery",
+          img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=640&h=640&fit=crop&q=70"
+        },
+        {
+          title: "CyberVision WebCam HUD",
+          category: "VISION & MATRIX HUD",
+          badgeClass: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
+          desc: "Kamera real-time bertema Cyberpunk & Iron Man dengan filter Matrix ASCII, thermal vision, dan target reticle berputar.",
+          link: "https://hekall21.github.io/cyber-vision-cam-3d/",
+          img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=640&h=640&fit=crop&q=70"
+        },
+        {
+          title: "Spider-Man Portfolio",
+          category: "CINEMATIC WEBXR",
+          badgeClass: "text-rose-400 border-rose-500/30 bg-rose-500/10",
+          desc: "Portofolio sinematik bertema Spider-Man dengan efek audio web synthesizer, animasi interaktif kursor, dan gaya Neo-Brutalisme.",
+          link: "https://spiderman-portofolio.vercel.app",
+          img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=640&h=640&fit=crop&q=70"
+        },
+        {
+          title: "Spatial Noir 3D Universe",
+          category: "THREE.JS VIRTUAL REALITY",
+          badgeClass: "text-indigo-400 border-indigo-500/30 bg-indigo-500/10",
+          desc: "Galeri luar angkasa 3D WebGL dengan 4.000 partikel kosmik, inti Torus logam raksasa, dan pod pameran 3D interaktif.",
+          link: "https://hekall21.github.io/spatial-noir-gallery/",
+          img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=640&h=640&fit=crop&q=70"
+        },
+        {
+          title: "Black Hole Singularity 3D",
+          category: "RELATIVISTIC SIMULATION",
+          badgeClass: "text-purple-400 border-purple-500/30 bg-purple-500/10",
+          desc: "Simulasi black hole relativistik dengan distorsi gravitasi dan piringan akresi partikel Three.js.",
+          link: "https://hekall21.github.io/black-hole-singularity-3d/",
+          img: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=640&h=640&fit=crop&q=70"
+        },
+        {
+          title: "Apple Spatial Window UI",
+          category: "VISIONOS DESIGN SYSTEM",
+          badgeClass: "text-slate-300 border-white/20 bg-white/10",
+          desc: "Antarmuka kaca visionOS dengan lapisan kedalaman 3D dinamis dan pantulan cahaya real-time.",
+          link: "https://hekall21.github.io/apple-spatial-window-ui/",
+          img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=640&h=640&fit=crop&q=70"
+        },
+        {
+          title: "Claude AI Studio",
+          category: "AI NATIVE WORKBENCH",
+          badgeClass: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+          desc: "Studio AI interaktif dengan antarmuka streaming Vercel AI SDK dan structured outputs.",
+          link: "https://hekall21.github.io/claude-ai-studio/",
+          img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=640&h=640&fit=crop&q=70"
+        }
+      ];
+
+      const stage = document.getElementById('cf-stage');
+      const viewport = document.getElementById('cf-viewport');
+      const badge = document.getElementById('cf-badge');
+      const title = document.getElementById('cf-title');
+      const desc = document.getElementById('cf-desc');
+      const link = document.getElementById('cf-link');
+      const pagination = document.getElementById('cf-pagination');
+      const prevBtn = document.getElementById('cf-prev-btn');
+      const nextBtn = document.getElementById('cf-next-btn');
+
+      if (!stage || !viewport) return;
+
+      const count = slides.length;
+      const rotate = 44;
+      const depth = 0.6;
+      const falloff = 0.56;
+      const fade = 0.12;
+      const gap = 0.08;
+      const loop = true;
+
+      let pos = 0;
+      let target = 0;
+      let raf = null;
+      let drag = null;
+      let selected = 0;
+      const cardElements = [];
+
+      slides.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'absolute left-1/2 top-0 aspect-square overflow-hidden rounded-2xl bg-slate-900 border border-white/10 shadow-2xl transition-shadow cursor-pointer select-none';
+        card.style.width = 'clamp(220px, 30vw, 320px)';
+        card.style.willChange = 'transform, opacity';
+        card.innerHTML = `
+          <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover select-none pointer-events-none" draggable="false" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-4 pointer-events-none">
+            <span class="text-[10px] mono text-cyan-300 font-bold tracking-wider">${item.category}</span>
+            <h4 class="text-sm sm:text-base font-bold text-white tracking-tight leading-snug">${item.title}</h4>
+          </div>
+        `;
+        card.addEventListener('click', () => {
+          if (idx === selected) {
+            window.open(item.link, '_blank');
+          } else {
+            goTo(idx);
+          }
+        });
+        stage.appendChild(card);
+        cardElements.push(card);
+
+        const dot = document.createElement('button');
+        dot.className = 'w-2 h-2 rounded-full transition-all duration-200 ' + (idx === 0 ? 'bg-cyan-400 w-6' : 'bg-white/20');
+        dot.setAttribute('aria-label', 'Go to project ' + (idx + 1));
+        dot.addEventListener('click', () => goTo(idx));
+        pagination.appendChild(dot);
+      });
+
+      const dots = pagination.children;
+
+      function indexAt(p) {
+        return ((Math.round(p) % count) + count) % count;
+      }
+
+      function updateHUD(idx) {
+        const item = slides[idx];
+        if (!item) return;
+        badge.className = 'text-[10px] md:text-xs mono px-3 py-1 rounded-full font-bold border ' + item.badgeClass;
+        badge.textContent = item.category;
+        title.textContent = item.title;
+        desc.textContent = item.desc;
+        link.href = item.link;
+
+        for (let i = 0; i < dots.length; i++) {
+          if (i === idx) {
+            dots[i].className = 'h-2 rounded-full bg-cyan-400 w-6 transition-all duration-200';
+          } else {
+            dots[i].className = 'w-2 h-2 rounded-full bg-white/20 transition-all duration-200';
+          }
+        }
+      }
+
+      function paint() {
+        const width = cardElements[0] && cardElements[0].offsetWidth > 0 ? cardElements[0].offsetWidth : 280;
+        const pitch = width * (1 + gap);
+
+        cardElements.forEach((card, index) => {
+          let offset = index - pos;
+          if (loop) {
+            offset = ((offset % count) + count) % count;
+            if (offset > count / 2) offset -= count;
+          }
+
+          const distance = Math.abs(offset);
+          const ramp = Math.pow(distance, falloff);
+          const tilt = Math.min(rotate * ramp, 82) * Math.sign(offset);
+
+          card.style.transform = `translateX(calc(-50% + ${offset * pitch}px)) translateZ(${-depth * width * ramp}px) rotateY(${-tilt}deg)`;
+          const edge = loop ? Math.min(1, Math.max(0, count / 2 - distance)) : 1;
+          card.style.opacity = String(Math.max(0, 1 - fade * distance) * edge);
+          card.style.zIndex = String(100 - Math.round(distance));
+        });
+      }
+
+      function settle(tgt) {
+        if (raf !== null) cancelAnimationFrame(raf);
+        target = tgt;
+        selected = indexAt(tgt);
+        updateHUD(selected);
+
+        function step() {
+          const remaining = target - pos;
+          if (Math.abs(remaining) < 0.0004) {
+            pos = target;
+            paint();
+            raf = null;
+            return;
+          }
+          pos += remaining * 0.16;
+          paint();
+          raf = requestAnimationFrame(step);
+        }
+        raf = requestAnimationFrame(step);
+      }
+
+      function clamp(p) {
+        return loop ? p : Math.max(0, Math.min(count - 1, p));
+      }
+
+      function goTo(index) {
+        const tgt = loop ? index + Math.round((target - index) / count) * count : index;
+        settle(clamp(tgt));
+      }
+
+      function nudge(by) {
+        settle(clamp(Math.round(target) + by));
+      }
+
+      viewport.addEventListener('pointerdown', (e) => {
+        if (raf !== null) {
+          cancelAnimationFrame(raf);
+          raf = null;
+        }
+        viewport.setPointerCapture(e.pointerId);
+        target = pos;
+        drag = {
+          id: e.pointerId,
+          x: e.clientX,
+          pos: pos,
+          v: 0,
+          t: performance.now()
+        };
+      });
+
+      viewport.addEventListener('pointermove', (e) => {
+        if (!drag || drag.id !== e.pointerId) return;
+        const width = cardElements[0] && cardElements[0].offsetWidth > 0 ? cardElements[0].offsetWidth : 280;
+        const pitch = width * (1 + gap);
+        const now = performance.now();
+        const prevPos = pos;
+        pos = clamp(drag.pos - (e.clientX - drag.x) / pitch);
+        drag.v = ((pos - prevPos) / Math.max(now - drag.t, 1)) * 1000;
+        drag.t = now;
+
+        const newSelected = indexAt(pos);
+        if (newSelected !== selected) {
+          selected = newSelected;
+          updateHUD(selected);
+        }
+        paint();
+      });
+
+      function endDrag(e) {
+        if (!drag || drag.id !== e.pointerId) return;
+        drag = null;
+        settle(clamp(Math.round(pos)));
+      }
+
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+
+      viewport.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          nudge(-1);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          nudge(1);
+        }
+      });
+
+      if (prevBtn) prevBtn.addEventListener('click', () => nudge(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => nudge(1));
+
+      window.addEventListener('resize', paint);
+
+      setTimeout(() => {
+        updateHUD(0);
+        paint();
+      }, 50);
+    })();
   </script>
 </body>
 </html>
